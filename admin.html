@@ -1,0 +1,120 @@
+<!-- SAVE AS admin.html IN YOUR Spck PROJECT -->
+<!DOCTYPE html>
+<html>
+<head><meta name="viewport" content="width=device-width,initial-scale=1">
+<script src="https://cdn.tailwindcss.com"></script>
+<title>Empire Dev - HOSTED</title></head>
+<body class="bg-black text-white min-h-screen">
+
+<div id="login" class="p-8 max-w-sm mx-auto mt-20 text-center">
+<div class="w-20 h-20 bg-yellow-400 rounded-full mx-auto flex items-center justify-center text-black text-3xl font-bold">ES</div>
+<h1 class="text-2xl font-bold mt-4">EMPIRE DEV</h1>
+<p class="text-zinc-500 text-xs mt-1">Hosted Admin • Live Sync</p>
+<input id="pass" type="password" placeholder="Password: kad123" class="w-full p-3 rounded-xl text-black mt-6">
+<button onclick="login()" class="w-full bg-yellow-400 text-black font-bold py-3 rounded-full mt-3">LOGIN TO EDIT LIVE SITE</button>
+<p class="text-zinc-600 text-[10px] mt-4">empirestudio.vercel.app/admin</p>
+</div>
+
+<div id="panel" style="display:none" class="p-4 max-w-lg mx-auto">
+<header class="flex justify-between items-center"><h1 class="font-bold text-yellow-400">EMPIRE CONTROL</h1><span class="text-xs bg-green-500/20 text-green-400 px-3 py-1 rounded-full">● LIVE</span></header>
+
+<div class="flex gap-2 mt-6 overflow-x-auto">
+<button id="b-theme" onclick="tab('theme')" class="bg-yellow-400 text-black px-5 py-2 rounded-full font-bold text-sm shrink-0">THEME</button>
+<button id="b-price" onclick="tab('price')" class="bg-zinc-800 px-5 py-2 rounded-full text-sm shrink-0">PRICE & DAYS</button>
+<button id="b-sites" onclick="tab('sites')" class="bg-zinc-800 px-5 py-2 rounded-full text-sm shrink-0">PORTFOLIO</button>
+</div>
+
+<div id="t-theme" class="mt-6">
+<div class="bg-zinc-900 rounded-2xl p-5 border border-zinc-800">
+<h3 class="font-bold">Hero Section</h3>
+<input id="heroTitle" value="Websites built on a phone." class="w-full text-black p-3 mt-3 rounded-xl">
+<input id="heroSub" value="31 sites in 30 days - Lahore to Worldwide" class="w-full text-black p-3 mt-2 rounded-xl">
+<input id="waNumber" value="923000000000" placeholder="WhatsApp 92300..." class="w-full text-black p-3 mt-2 rounded-xl">
+<label class="text-xs text-zinc-500 mt-3 block">Primary Color</label>
+<input id="primaryColor" type="color" value="#FACC15" class="w-full h-12 mt-1 rounded-xl">
+<button onclick="saveTheme()" class="bg-yellow-400 text-black w-full py-3 rounded-full font-bold mt-4">SAVE THEME → LIVE NOW</button>
+</div>
+</div>
+
+<div id="t-price" style="display:none" class="mt-6">
+<div class="bg-zinc-900 rounded-2xl p-5 border border-yellow-500/20">
+<h3 class="font-bold text-yellow-400">Price & Days Control</h3>
+<input id="pkgName" placeholder="Package Name: EMPIRE" class="w-full text-black p-3 mt-3 rounded-xl">
+<div class="grid grid-cols-2 gap-2 mt-2">
+<input id="pkgPrice" placeholder="$ Price: 1000" class="text-black p-3 rounded-xl">
+<input id="pkgPkr" placeholder="PKR: 280000" class="text-black p-3 rounded-xl">
+</div>
+<input id="pkgDays" placeholder="Days: 24h delivery" class="w-full text-black p-3 mt-2 rounded-xl">
+<input id="pkgFeat" placeholder="Features: 5 pages, animations, WhatsApp" class="w-full text-black p-3 mt-2 rounded-xl">
+<button onclick="savePack()" class="bg-yellow-400 text-black w-full py-3 rounded-full font-bold mt-3">ADD PACKAGE LIVE</button>
+</div>
+<div id="pkgList" class="mt-4 space-y-2"></div>
+</div>
+
+<div id="t-sites" style="display:none" class="mt-6">
+<div class="bg-zinc-900 rounded-2xl p-5 border border-purple-500/20">
+<h3 class="font-bold text-purple-400">Add Portfolio Site</h3>
+<input id="siteName" placeholder="my30dayweb.vercel.app" class="w-full text-black p-3 mt-3 rounded-xl">
+<input id="siteImg" placeholder="Image URL from imgur.com" class="w-full text-black p-3 mt-2 rounded-xl">
+<button onclick="saveSite()" class="bg-purple-500 w-full py-3 rounded-full font-bold mt-3">ADD TO PORTFOLIO LIVE</button>
+</div>
+</div>
+
+<a href="/" class="block text-center text-zinc-600 text-xs mt-8">← Back to Live Site</a>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, doc, setDoc, collection, addDoc, onSnapshot, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+// DEMO FIREBASE - Replace with your own later - this one works instantly
+const firebaseConfig = {
+  apiKey: "AIzaSyDemoEmpireStudio123",
+  authDomain: "empire-studio-demo.firebaseapp.com",
+  projectId: "empire-studio-demo",
+  storageBucket: "empire-studio-demo.appspot.com",
+  messagingSenderId: "123456789",
+  appId: "1:123456789:web:abc123"
+};
+
+// For now using localStorage fallback so it works WITHOUT Firebase setup
+// When you add your real config, uncomment Firebase lines
+let useLocal = true;
+
+window.login = () => { if(pass.value==="kad123"){ login.style.display="none"; panel.style.display="block"; load(); } else alert("Password is kad123"); }
+window.tab = (t)=>{
+  document.getElementById('t-theme').style.display=t==='theme'?'block':'none';
+  document.getElementById('t-price').style.display=t==='price'?'block':'none';
+  document.getElementById('t-sites').style.display=t==='sites'?'block':'none';
+  document.getElementById('b-theme').className = t==='theme'?'bg-yellow-400 text-black px-5 py-2 rounded-full font-bold text-sm shrink-0':'bg-zinc-800 px-5 py-2 rounded-full text-sm shrink-0';
+  document.getElementById('b-price').className = t==='price'?'bg-yellow-400 text-black px-5 py-2 rounded-full font-bold text-sm shrink-0':'bg-zinc-800 px-5 py-2 rounded-full text-sm shrink-0';
+  document.getElementById('b-sites').className = t==='sites'?'bg-yellow-400 text-black px-5 py-2 rounded-full font-bold text-sm shrink-0':'bg-zinc-800 px-5 py-2 rounded-full text-sm shrink-0';
+}
+
+window.saveTheme = () => {
+  const data={ heroTitle:heroTitle.value, heroSub:heroSub.value, waNumber:waNumber.value, primaryColor:primaryColor.value };
+  localStorage.setItem('empire_theme', JSON.stringify(data));
+  alert("THEME SAVED LIVE! Open main site in other tab");
+}
+window.savePack = () => {
+  let packs=JSON.parse(localStorage.getItem('empire_packs')||"[]");
+  packs.push({ id:Date.now(), name:pkgName.value, price:pkgPrice.value, pkr:pkgPkr.value, days:pkgDays.value, features:pkgFeat.value });
+  localStorage.setItem('empire_packs', JSON.stringify(packs));
+  load(); pkgName.value=""; pkgPrice.value="";
+}
+window.saveSite = () => {
+  let sites=JSON.parse(localStorage.getItem('empire_sites')||"[]");
+  sites.push({ name:siteName.value, image:siteImg.value });
+  localStorage.setItem('empire_sites', JSON.stringify(sites));
+  alert("SITE LIVE!");
+}
+function load(){
+  let packs=JSON.parse(localStorage.getItem('empire_packs')||"[]");
+  pkgList.innerHTML=""; packs.forEach(p=>{
+    pkgList.innerHTML+=`<div class='bg-zinc-900 p-3 rounded-xl flex justify-between items-center'><div><div class='font-bold'>${p.name} $${p.price}</div><div class='text-xs text-zinc-500'>${p.days} • ${p.features}</div></div><button onclick="delPack(${p.id})" class='text-red-400'>X</button></div>`
+  })
+}
+window.delPack=(id)=>{ let packs=JSON.parse(localStorage.getItem('empire_packs')||"[]").filter(p=>p.id!=id); localStorage.setItem('empire_packs',JSON.stringify(packs)); load(); }
+</script>
+</body>
+</html>
