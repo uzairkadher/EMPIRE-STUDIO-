@@ -18,40 +18,51 @@
 <section class="px-6 py-12 text-center">
 <h1 id="heroText" class="text-4xl font-bold leading-tight">web developer team by <span class="text-yellow-400">@4t_jagga</span></h1>
 <p class="text-zinc-500 text-xs mt-3 tracking-wide">31 sites in 30 days — Lahore → Worldwide</p>
-<a id="waBtn" href="https://wa.me/923000000000" target="_blank" class="inline-block bg-yellow-400 text-black font-bold px-8 py-3 rounded-full mt-6 text-sm">WhatsApp Me</a>
+<a id="waBtn" href="https://wa.me/923558182875" target="_blank" class="inline-block bg-yellow-400 text-black font-bold px-8 py-3 rounded-full mt-6 text-sm">WhatsApp Me</a>
 </section>
 
 <h2 class="px-6 font-bold text-sm uppercase tracking-widest">Packages — Live</h2>
 <div id="packages" class="p-4 grid gap-4"></div>
 
-<h2 class="px-6 font-bold text-sm uppercase tracking-widest mt-8">Portfolio</h2>
-<div id="sites" class="p-4 grid grid-cols-2 gap-3 text-xs text-zinc-500">Coming soon — 31 sites</div>
+<h2 class="px-6 font-bold text-sm uppercase tracking-widest mt-8">Portfolio — Proof</h2>
+<div id="sites" class="p-4 grid gap-4">
+  <a href="https://my30dayweb.vercel.app/" target="_blank" class="bg-zinc-900 border border-yellow-400 rounded-2xl p-5 block hover:bg-zinc-800 transition">
+    <div class="flex justify-between items-center">
+      <span class="text-yellow-400 font-bold tracking-widest text-xs">DAY 30 — EMPIRE 100%</span>
+      <span class="bg-yellow-400 text-black text-[10px] px-2 py-1 rounded-full font-bold">LIVE</span>
+    </div>
+    <div class="text-6xl mt-4 text-center">👑</div>
+    <div class="mt-4">
+      <div class="font-bold text-lg">Empire — Final Coronation</div>
+    </div>
+    <div class="mt-3 flex gap-2 text-[10px]">
+      <span class="border border-zinc-700 px-2 py-1 rounded-full">Spck Only</span>
+      <span class="border border-zinc-700 px-2 py-1 rounded-full">Lahore</span>
+      <span class="border border-zinc-700 px-2 py-1 rounded-full">@4t_jagga</span>
+    </div>
+  </a>
+</div>
 
 <footer class="p-6 text-center text-[10px] text-zinc-600 border-t border-zinc-900 mt-10">
-© 2026 Empire Studio — @4t_jagga
+© 2026 Empire Studio — web developer team by @4t_jagga
 </footer>
 
 <script>
-// Render packages from localStorage (Chrome)
 function render(){
-  // theme
   let theme = JSON.parse(localStorage.getItem('empire_theme')||"{}");
   if(theme.heroTitle && theme.heroTitle.trim()!=""){
     let t = theme.heroTitle;
-    // make @4t_jagga yellow if present
     if(t.includes('@4t_jagga')){
       t = t.replace('@4t_jagga','<span class="text-yellow-400">@4t_jagga</span>');
     } else if(t.includes('@')){
-      // make any @ mention yellow
       t = t.replace(/(@\w+)/g,'<span class="text-yellow-400">$1</span>');
     }
     document.getElementById('heroText').innerHTML = t;
   }
   if(theme.waNumber){
-    document.getElementById('waBtn').href = "https://wa.me/"+theme.waNumber.replace(/[^0-9]/g,'');
+    let clean = theme.waNumber.replace(/[^0-9]/g,'');
+    document.getElementById('waBtn').href = "https://wa.me/"+clean;
   }
-
-  // packages
   let packs = JSON.parse(localStorage.getItem('empire_packs')||"[]");
   let box = document.getElementById('packages');
   if(packs.length===0){
@@ -67,13 +78,12 @@ function render(){
         </div>
         <div class="text-3xl font-bold mt-3">$${p.price||'300'} <span class="text-xs text-zinc-500 font-normal">${p.pkr||''} PKR</span></div>
         <p class="text-xs text-zinc-400 mt-2">${p.features||''}</p>
-        <a href="https://wa.me/923000000000?text=I want ${p.name}" class="block bg-yellow-400 text-black text-center font-bold py-3 rounded-full mt-4 text-sm">Order ${p.name||''}</a>
+        <a href="https://wa.me/923558182875?text=I want ${p.name}" class="block bg-yellow-400 text-black text-center font-bold py-3 rounded-full mt-4 text-sm">Order ${p.name||''}</a>
       </div>`;
     });
   }
 }
 render();
-// auto-refresh every 2 sec so admin changes appear
 setInterval(render, 2000);
 </script>
 </body>
