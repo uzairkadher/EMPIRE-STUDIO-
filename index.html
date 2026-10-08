@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EMPIRE STUDIO — by @4t_jagga — Lahore — 3 Day Luxury Sites</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;600;700&family=Manrope:wght@300;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0e0e0c;color:#efebe2;font-family:'Manrope',sans-serif;padding:14px;display:flex;justify-content:center;}
+.wrap{width:100%;max-width:1080px;border:1px solid #D4AF37;background:linear-gradient(180deg,#1f1e1a,#0e0e0c);box-shadow:14px 14px 0 #D4AF37,0 0 80px rgba(212,175,55,0.2);overflow:hidden;}
+.nav{padding:12px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #D4AF37;background:#111;position:sticky;top:0;z-index:10;}
+.nav .logo{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:#D4AF37;letter-spacing:2px;}
+.nav .logo span{color:#fff;font-weight:300;}
+.nav .links{display:flex;gap:12px;font-size:8px;letter-spacing:3px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;}
+.nav .links a{color:#D4AF37;text-decoration:none;border:1px solid rgba(212,175,55,0.3);padding:6px 12px;}
+.hero{padding:40px 20px;display:grid;grid-template-columns:1.3fr 0.7fr;gap:20px;border-bottom:1px solid #D4AF37;position:relative;}
+@media(max-width:800px){.hero{grid-template-columns:1fr;}}
+.eyebrow{font-size:8px;letter-spacing:5px;text-transform:uppercase;color:#D4AF37;font-family:'JetBrains Mono',monospace;margin-bottom:12px;}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,6vw,72px);line-height:0.85;font-weight:300;}
+.hero h1 b{color:#D4AF37;font-weight:700;}
+.hero h1 i{font-style:italic;}
+.hero .sub{margin-top:16px;font-size:13px;line-height:1.7;opacity:0.6;max-width:480px;}
+.hero .proof{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;}
+.badge{border:1px solid #D4AF37;padding:8px 14px;font-size:8px;letter-spacing:2px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;color:#D4AF37;background:rgba(212,175,55,0.08);}
+.card{border:2px solid #D4AF37;border-radius:16px;padding:20px;background:radial-gradient(circle at 30% 20%,#2a2a2a,#0e0e0c);text-align:center;}
+.card .big{font-family:'Cormorant Garamond',serif;font-size:48px;color:#D4AF37;font-weight:700;}
+.card .sm{font-size:8px;letter-spacing:4px;text-transform:uppercase;opacity:0.5;font-family:'JetBrains Mono',monospace;margin-top:6px;}
+.card .price{margin-top:14px;font-size:20px;font-weight:700;color:#fff;}
+.card .price s{opacity:0.3;font-size:12px;margin-left:8px;}
+.card .btn{display:block;margin-top:16px;background:#D4AF37;color:#111;text-decoration:none;padding:14px;font-size:9px;letter-spacing:3px;text-transform:uppercase;font-weight:700;font-family:'JetBrains Mono',monospace;}
+.offers{padding:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#D4AF37;border-bottom:1px solid #D4AF37;}
+@media(max-width:700px){.offers{grid-template-columns:1fr;}}
+.offer{background:#111;padding:18px;}
+.offer h3{font-family:'Cormorant Garamond',serif;color:#D4AF37;font-size:18px;margin-bottom:8px;}
+.offer p{font-size:10px;opacity:0.6;line-height:1.6;font-family:'JetBrains Mono',monospace;}
+.offer ul{margin-top:10px;list-style:none;font-size:9px;font-family:'JetBrains Mono',monospace;opacity:0.7;line-height:2;}
+.work{padding:20px;border-bottom:1px solid #D4AF37;}
+.work .head{font-size:8px;letter-spacing:4px;text-transform:uppercase;color:#D4AF37;font-family:'JetBrains Mono',monospace;display:flex;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px;}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+@media(max-width:800px){.grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:500px){.grid{grid-template-columns:1fr;}}
+.site{border:1px solid rgba(212,175,55,0.2);background:#171714;padding:12px;transition:0.2s;text-decoration:none;color:inherit;display:block;}
+.site:hover{border-color:#D4AF37;transform:translateY(-2px);}
+.site .thumb{height:90px;background:linear-gradient(180deg,#1f1e1a,#0e0e0c);border:1px solid rgba(212,175,55,0.1);display:flex;align-items:center;justify-content:center;font-size:28px;}
+.site .name{margin-top:10px;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:#D4AF37;font-family:'JetBrains Mono',monospace;}
+.site .desc{margin-top:4px;font-family:'Cormorant Garamond',serif;font-size:16px;}
+.testi{padding:20px;background:linear-gradient(90deg,#1a1a16,#0e0e0c);border-bottom:1px solid #D4AF37;display:grid;grid-template-columns:0.8fr 1.2fr;gap:20px;align-items:center;}
+@media(max-width:700px){.testi{grid-template-columns:1fr;}}
+.testi h2{font-family:'Cormorant Garamond',serif;font-size:32px;line-height:0.9;}
+.testi h2 b{color:#D4AF37;}
+.testi p{font-size:11px;line-height:1.7;opacity:0.6;font-family:'JetBrains Mono',monospace;margin-top:10px;}
+.cta{padding:28px 20px;text-align:center;background:#D4AF37;color:#111;}
+.cta h2{font-family:'Cormorant Garamond',serif;font-size:38px;line-height:0.9;}
+.cta p{margin-top:10px;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-family:'JetBrains Mono',monospace;opacity:0.7;}
+.cta .btns{margin-top:18px;display:flex;justify-content:center;gap:10px;flex-wrap:wrap;}
+.cta .btn{padding:14px 22px;font-size:9px;letter-spacing:3px;text-transform:uppercase;text-decoration:none;font-weight:700;font-family:'JetBrains Mono',monospace;border:1px solid #111;}
+.btn-black{background:#111;color:#D4AF37;}
+.btn-white{background:#fff;color:#111;}
+.footer{padding:12px 20px;display:flex;justify-content:space-between;font-size:7px;letter-spacing:3px;text-transform:uppercase;color:#D4AF37;font-family:'JetBrains Mono',monospace;background:#111;flex-wrap:wrap;gap:8px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="nav">
+<div class="logo">EMPIRE <span>STUDIO</span> — JAGGA</div>
+<div class="links"><a href="#work">Work 30/30</a><a href="https://wa.me/923558182875" target="_blank">WhatsApp</a></div>
+</div>
+
+<div class="hero">
+<div>
+<div class="eyebrow">Lahore — Built on Spck Mobile — No Laptop — 30 Days Straight</div>
+<h1>I built <b>30</b><br>luxury sites<br><i>in 30 days.</i><br>On my phone.</h1>
+<div class="sub">Proof: my30dayweb.vercel.app — 100% complete — 30/30 — No zero days — Oct 2026 — @4t_jagga — Now I build luxury sites for founders in 3 days — $300 intro — Lahore to Dubai.</div>
+<div class="proof">
+<div class="badge">30/30 Built — Proof</div>
+<div class="badge">Spck Mobile Only</div>
+<div class="badge">3 Day Delivery</div>
+<div class="badge">+92 355 8182875</div>
+</div>
+</div>
+<div class="card">
+<div class="big">3 Days</div>
+<div class="sm">Luxury Site Delivery — Intro Price</div>
+<div class="price">$300 <s>$600</s></div>
+<div style="font-size:8px;margin-top:6px;opacity:0.5;font-family:'JetBrains Mono',monospace;">2 slots this week only</div>
+<a class="btn" href="https://wa.me/923558182875?text=Salam%20Jagga%20—%20I%20saw%20your%2030/30%20Empire%20—%20I%20want%20a%20luxury%20site%20in%203%20days" target="_blank">Book on WhatsApp — $150 to Start ↗</a>
+<div style="margin-top:10px;font-size:7px;opacity:0.4;font-family:'JetBrains Mono',monospace;letter-spacing:1px;">Half upfront — Half on delivery — No love? No second half.</div>
+</div>
+</div>
+
+<div class="offers">
+<div class="offer">
+<h3>For Clothing Brands</h3>
+<p>Luxury store that looks like $10k brand — not Shopify template.</p>
+<ul>
+<li>— Hero + Shop + Lookbook</li>
+<li>— WhatsApp Order</li>
+<li>— 3 days — $300</li>
+</ul>
+</div>
+<div class="offer">
+<h3>For Founders / Personal Brand</h3>
+<p>Your Empire page — like my Day 30 — proof > resume.</p>
+<ul>
+<li>— About + Proof + Work + CTA</li>
+<li>— IG + Vercel link</li>
+<li>— 3 days — $300</li>
+</ul>
+</div>
+<div class="offer">
+<h3>For Local Business — Lahore</h3>
+<p>Cafe, barber, real estate — luxury, not cheap.</p>
+<ul>
+<li>— Menu / Services + Map + Booking</li>
+<li>— Google ready</li>
+<li>— 3 days — $300</li>
+</ul>
+</div>
+</div>
+
+<div class="work" id="work">
+<div class="head"><span>Selected Work — My 30-Day Empire — Proof, Not Promises</span><span>Day 20 → Day 30 — Best 9</span></div>
+<div class="grid">
+<a class="site" href="https://my30dayweb.vercel.app/" target="_blank"><div class="thumb">🗄️</div><div class="name">DAY 20 — VAULT</div><div class="desc">The Vault 60%</div></a>
+<a class="site" href="https://my30dayweb.vercel.app/" target="_blank"><div class="thumb">🔐</div><div class="name">DAY 24 — VAULT 80%</div><div class="desc">Safe 80% — Security</div></a>
+<a class="site" href="https://my30dayweb.vercel.app/" target="_blank"><div class="thumb">📜</div><div class="name">DAY 25 — CERT 83%</div><div class="desc">Certificate 83%</div></a>
+<a class="site" href="https://my30dayweb.vercel.app/" target="_blank"><div class="thumb">📒</div><div class="name">DAY 26 — LEDGER</div><div class="desc">Ledger — Finance</div></a>
+<a class="site" href="https://my30dayweb.vercel.app/" target="_blank"><div class="thumb">🛡️</div><div class="name">DAY 27 — SAFE 90%</div><div class="desc">Safe 90% — Final Guard</div></a>
+<a class="site" href="https://my30dayweb.vercel.app/" target="_blank"><div class="thumb">📁</div><div class="name">DAY 28 — DOSSIER</div><div class="desc">Dossier — Archive</div></a>
+<a class="site" href="https://my30dayweb.vercel.app/" target="_blank"><div class="thumb">🤝</div><div class="name">DAY 29 — PACT 96%</div><div class="desc">Pact 96% — Agreement</div></a>
+<a class="site" href="https://my30dayweb.vercel.app/" target="_blank"><div class="thumb">👑</div><div class="name">DAY 30 — EMPIRE 100%</div><div class="desc">Empire — Final Coronation</div></a>
+<a class="site" href="https://my30dayweb.vercel.app/" target="_blank" style="border-color:#D4AF37;background:rgba(212,175,55,0.08);"><div class="thumb">🔥</div><div class="name">VIEW ALL 30</div><div class="desc">Full Archive — 30/30</div></a>
+</div>
+</div>
+
+<div class="testi">
+<div>
+<h2>The story is the <b>product.</b></h2>
+<p>Lahore. Spck mobile editor. No MacBook. No team. 30 nights. 1% battery. Built anyway. This is not design. This is proof that execution is luxury. — @4t_jagga — Oct 2026</p>
+</div>
+<div>
+<p style="font-size:13px;opacity:0.9;line-height:1.6;color:#D4AF37;font-family:'Cormorant Garamond',serif;">"I don't sell websites. I sell the feeling that your brand is already an empire. The site is just the uniform."</p>
+<p>— Process: Day 1: You send logo + IG + 3 refs — Day 2: I build hero + 1 section — You approve — Day 3: Full site + Vercel + Domain connect — Delivery.</p>
+<p>Tool: Spck + Vercel — same as my 30-day empire — fast, luxury, mobile-first.</p>
+</div>
+</div>
+
+<div class="cta">
+<h2>Want your Empire in 3 days?</h2>
+<p>2 slots this week — $300 intro — WhatsApp: +92 355 8182875 — @4t_jagga</p>
+<div class="btns">
+<a class="btn btn-black" href="https://wa.me/923558182875?text=Salam%20Jagga%20—%20Book%20my%20luxury%20site%20—%20EMPIRE" target="_blank">WhatsApp — Book Now ↗</a>
+<a class="btn btn-white" href="https://www.instagram.com/4t_jagga" target="_blank">See Proof on IG ↗</a>
+</div>
+</div>
+
+<div class="footer"><span>Empire Studio — by @4t_jagga — +92 355 8182875 — Lahore — 30/30 Proof — Built on Spck Mobile — Oct 2026</span><span>Luxury is Consistency — 3 Day Delivery — $300</span></div>
+</div>
+</body>
+</html>
