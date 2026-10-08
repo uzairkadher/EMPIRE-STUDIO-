@@ -18,67 +18,62 @@
 <section class="px-6 py-12 text-center">
 <h1 id="heroText" class="text-4xl font-bold leading-tight">web developer team by <span class="text-yellow-400">@4t_jagga</span></h1>
 <p class="text-zinc-500 text-xs mt-3 tracking-wide">31 sites in 30 days — Lahore → Worldwide</p>
-<a id="waBtn" href="https://wa.me/923558182875" target="_blank" class="inline-block bg-yellow-400 text-black font-bold px-8 py-3 rounded-full mt-6 text-sm">WhatsApp Me</a>
+<a id="waBtn" href="https://wa.me/923558182875?text=Salam%20Jagga%20%E2%80%94%20I%20saw%20your%2030%2F30%20Empire%20%E2%80%94%20I%20want%20a%20luxury%20site%20in%203%20days" target="_blank" class="inline-block bg-yellow-400 text-black font-bold px-8 py-3 rounded-full mt-6 text-sm">WhatsApp Me</a>
 </section>
 
 <h2 class="px-6 font-bold text-sm uppercase tracking-widest">Packages — Live</h2>
 <div id="packages" class="p-4 grid gap-4"></div>
 
 <h2 class="px-6 font-bold text-sm uppercase tracking-widest mt-8">Portfolio — Proof</h2>
-<div id="sites" class="p-4 grid gap-4">
-  <a href="https://my30dayweb.vercel.app/" target="_blank" class="bg-zinc-900 border border-yellow-400 rounded-2xl p-5 block hover:bg-zinc-800 transition">
-    <div class="flex justify-between items-center">
-      <span class="text-yellow-400 font-bold tracking-widest text-xs">DAY 30 — EMPIRE 100%</span>
-      <span class="bg-yellow-400 text-black text-[10px] px-2 py-1 rounded-full font-bold">LIVE</span>
-    </div>
+<div class="p-4 grid gap-4">
+  <a href="https://my30dayweb.vercel.app/" target="_blank" class="bg-zinc-900 border border-yellow-400 rounded-2xl p-5 block">
+    <div class="flex justify-between items-center"><span class="text-yellow-400 font-bold tracking-widest text-xs">DAY 30 — EMPIRE 100%</span><span class="bg-yellow-400 text-black text-[10px] px-2 py-1 rounded-full font-bold">LIVE</span></div>
     <div class="text-6xl mt-4 text-center">👑</div>
-    <div class="mt-4">
-      <div class="font-bold text-lg">Empire — Final Coronation</div>
-    </div>
-    <div class="mt-3 flex gap-2 text-[10px]">
-      <span class="border border-zinc-700 px-2 py-1 rounded-full">Spck Only</span>
-      <span class="border border-zinc-700 px-2 py-1 rounded-full">Lahore</span>
-      <span class="border border-zinc-700 px-2 py-1 rounded-full">@4t_jagga</span>
-    </div>
+    <div class="mt-4 font-bold text-lg">Empire — Final Coronation</div>
   </a>
 </div>
 
-<footer class="p-6 text-center text-[10px] text-zinc-600 border-t border-zinc-900 mt-10">
-© 2026 Empire Studio — web developer team by @4t_jagga
-</footer>
+<footer class="p-6 text-center text-[10px] text-zinc-600 border-t border-zinc-900 mt-10">© 2026 Empire Studio — @4t_jagga</footer>
 
 <script>
 function render(){
   let theme = JSON.parse(localStorage.getItem('empire_theme')||"{}");
   if(theme.heroTitle && theme.heroTitle.trim()!=""){
     let t = theme.heroTitle;
-    if(t.includes('@4t_jagga')){
-      t = t.replace('@4t_jagga','<span class="text-yellow-400">@4t_jagga</span>');
-    } else if(t.includes('@')){
-      t = t.replace(/(@\w+)/g,'<span class="text-yellow-400">$1</span>');
-    }
+    if(t.includes('@4t_jagga')) t = t.replace('@4t_jagga','<span class="text-yellow-400">@4t_jagga</span>');
     document.getElementById('heroText').innerHTML = t;
   }
   if(theme.waNumber){
     let clean = theme.waNumber.replace(/[^0-9]/g,'');
-    document.getElementById('waBtn').href = "https://wa.me/"+clean;
+    document.getElementById('waBtn').href = "https://wa.me/"+clean+"?text=Salam%20Jagga%20%E2%80%94%20I%20saw%20your%2030%2F30%20Empire%20%E2%80%94%20I%20want%20a%20luxury%20site%20in%203%20days";
   }
+
   let packs = JSON.parse(localStorage.getItem('empire_packs')||"[]");
   let box = document.getElementById('packages');
   if(packs.length===0){
-    box.innerHTML = `<div class='border border-dashed border-zinc-800 p-8 rounded-2xl text-center'><p class='text-zinc-300 text-sm'>No packages yet — add in DEV panel</p><p class='text-[10px] text-zinc-600 mt-2'>Open in Chrome: /admin.html → add packages</p></div>`;
+    box.innerHTML = `<div class='border border-dashed border-zinc-800 p-8 rounded-2xl text-center text-sm text-zinc-500'>No packages yet</div>`;
   } else {
     box.innerHTML="";
     packs.forEach(p=>{
+      // HERE - PACKAGE NAME + PRICE + PKR + DAYS AUTO ADDED
+      let fullMsg = `Salam Jagga — I saw your 30/30 Empire — I want a luxury site in 3 days
+
+Package: ${p.name}
+Price: $${p.price} - ${p.pkr} PKR
+Delivery: ${p.days}
+Features: ${p.features}
+
+My budget is ready.`;
+      let encodedMsg = encodeURIComponent(fullMsg);
       box.innerHTML+=`
       <div class="bg-zinc-900 border border-yellow-500/20 rounded-2xl p-5">
         <div class="flex justify-between items-center text-xs">
           <b class="text-yellow-400 tracking-widest">${p.name||'PACKAGE'}</b>
           <span class="bg-zinc-800 px-2 py-1 rounded-full text-[10px]">${p.days||''}</span>
         </div>
-        <div class="text-3xl font-bold mt-3">$${p.price||'300'} <span class="text-xs text-zinc-500 font-normal">${p.pkr||''} PKR</span></div>
+        <div class="text-3xl font-bold mt-3">$${p.price||'30'} <span class="text-xs text-zinc-500 font-normal">${p.pkr||''} PKR</span></div>
         <p class="text-xs text-zinc-400 mt-2">${p.features||''}</p>
-        <a href="https://wa.me/923558182875?text=I want ${p.name}" class="block bg-yellow-400 text-black text-center font-bold py-3 rounded-full mt-4 text-sm">Order ${p.name||''}</a>
+        <a href="https://wa.me/923558182875?text=${encodedMsg}" target="_blank" class="block bg-yellow-400 text-black text-center font-bold py-3 rounded-full mt-4 text-sm">Order ${p.name||''}</a>
       </div>`;
     });
   }
