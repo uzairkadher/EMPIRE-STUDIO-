@@ -1,63 +1,42 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Empire Studio - Built on Phone</title>
+<head><meta name="viewport" content="width=device-width,initial-scale=1">
 <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-black text-white">
-<header class="p-6 flex justify-between items-center border-b border-zinc-900">
-<span class="font-bold tracking-widest text-yellow-400">EMPIRE STUDIO</span>
+<header class="p-6 flex justify-between border-b border-zinc-900">
+<span class="font-bold text-yellow-400">EMPIRE STUDIO</span>
 <a href="admin.html" class="text-[10px] bg-zinc-900 px-3 py-1 rounded-full">DEV</a>
 </header>
 
-<section class="px-6 py-12 text-center">
-<h1 id="heroTitle" class="text-4xl font-bold leading-tight">Websites built on<br><span class="text-yellow-400">a phone.</span></h1>
-<p id="heroSub" class="text-zinc-400 mt-3 text-sm">31 sites in 30 days — Lahore → Worldwide</p>
-<a id="waBtn" href="#" class="inline-block bg-yellow-400 text-black font-bold px-8 py-3 rounded-full mt-6">WhatsApp Me</a>
+<section class="px-6 py-10 text-center">
+<h1 class="text-3xl font-bold">Websites built on <span class="text-yellow-400">a phone.</span></h1>
+<p class="text-zinc-500 text-xs mt-2">31 sites in 30 days — Lahore → Worldwide</p>
+<a id="waBtn" href="#" class="inline-block bg-yellow-400 text-black font-bold px-8 py-3 rounded-full mt-4">WhatsApp Me</a>
 </section>
 
-<h2 class="px-6 font-bold mt-8">PACKAGES — Live from Admin</h2>
+<h2 class="px-6 font-bold text-sm">PACKAGES — Live from Admin</h2>
 <div id="packages" class="p-4 grid gap-4"></div>
 
-<h2 class="px-6 font-bold mt-8">PORTFOLIO — Live from Admin</h2>
+<h2 class="px-6 font-bold text-sm mt-4">PORTFOLIO</h2>
 <div id="sites" class="p-4 grid grid-cols-2 gap-3"></div>
 
 <script>
 function render(){
-  // THEME
   let theme = JSON.parse(localStorage.getItem('empire_theme')||"{}");
-  if(theme.heroTitle) document.getElementById('heroTitle').innerHTML = theme.heroTitle;
-  if(theme.heroSub) document.getElementById('heroSub').innerText = theme.heroSub;
-  if(theme.waNumber) document.getElementById('waBtn').href = "https://wa.me/"+theme.waNumber+"?text=I want website";
-  if(theme.primaryColor) document.documentElement.style.setProperty('--tw', theme.primaryColor);
-
-  // PACKAGES
+  if(theme.waNumber) document.getElementById('waBtn').href="https://wa.me/"+theme.waNumber;
   let packs = JSON.parse(localStorage.getItem('empire_packs')||"[]");
   let box = document.getElementById('packages');
-  if(packs.length==0){
-    box.innerHTML = `<div class='border border-dashed border-zinc-700 p-8 rounded-2xl text-center text-zinc-500'>No packages yet<br><span class='text-xs'>Go to admin.html → Add package</span></div>`;
+  if(packs.length===0){
+    box.innerHTML = `<div class='border border-dashed border-zinc-800 p-6 rounded-xl text-center'><p class='text-zinc-400 text-sm'>No packages yet</p><p class='text-[10px] text-zinc-600 mt-1'>Go to DEV → add package in SAME browser</p><button onclick="localStorage.clear(); location.reload()" class='mt-3 text-[10px] underline'>Clear cache & reload</button></div>`;
   } else {
     box.innerHTML="";
     packs.forEach(p=>{
-      box.innerHTML+=`
-        <div class="bg-zinc-900 border border-yellow-500/20 rounded-2xl p-5">
-          <div class="flex justify-between"><span class="text-yellow-400 font-bold text-xs tracking-widest">${p.name}</span><span class="text-[10px] bg-zinc-800 px-2 py-1 rounded-full">${p.days}</span></div>
-          <div class="text-3xl font-bold mt-2">$${p.price} <span class="text-sm font-normal text-zinc-500">/ ${p.pkr} PKR</span></div>
-          <p class="text-xs text-zinc-400 mt-2">${p.features}</p>
-          <a href="https://wa.me/${theme.waNumber||'923000000000'}?text=I want ${p.name}" class="block bg-yellow-400 text-black text-center font-bold py-3 rounded-full mt-4">Order ${p.name}</a>
-        </div>`;
+      box.innerHTML+=`<div class="bg-zinc-900 border border-yellow-500/20 rounded-2xl p-5"><div class="flex justify-between text-xs"><b class="text-yellow-400">${p.name}</b><span class="bg-zinc-800 px-2 py-1 rounded-full">${p.days}</span></div><div class="text-2xl font-bold mt-2">$${p.price} <span class="text-xs text-zinc-500">${p.pkr} PKR</span></div><p class="text-xs text-zinc-400 mt-2">${p.features}</p><a href="https://wa.me/923000000000" class="block bg-yellow-400 text-black text-center font-bold py-2 rounded-full mt-3 text-sm">Order</a></div>`;
     });
   }
-
-  // SITES
-  let sites = JSON.parse(localStorage.getItem('empire_sites')||"[]");
-  let sbox = document.getElementById('sites');
-  sbox.innerHTML = sites.map(s=>`<div class="bg-zinc-900 rounded-xl overflow-hidden"><img src="${s.image}" class="w-full h-24 object-cover"><p class="p-2 text-[11px]">${s.name}</p></div>`).join('') || "<p class='text-zinc-600 text-xs'>No sites — add in admin</p>";
 }
 render();
-// Auto refresh every 2 sec if you edit in other tab
-setInterval(render, 2000);
 </script>
 </body>
 </html>
